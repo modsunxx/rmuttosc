@@ -9,9 +9,13 @@
 				<a
 					// eslint-disable-next-line svelte/no-navigation-without-resolve
 					href="/"
-					class="text-xl font-bold tracking-tight text-blue-800 transition-colors hover:text-blue-900"
+					class="inline-block transition-transform hover:scale-105 active:scale-95"
 				>
-					สภานักศึกษา RMUTTO
+					<img
+						src="/rmuttosclogo_nobg.png"
+						alt="โลโก้สภานักศึกษา RMUTTO"
+						class="h-30 w-auto object-contain drop-shadow-sm"
+					/>
 				</a>
 			</div>
 
@@ -28,12 +32,12 @@
 
 				<a
 					// eslint-disable-next-line svelte/no-navigation-without-resolve
-					href="/about"
-					class="pb-1 transition-colors {$page.url.pathname === '/about'
+					href="/services"
+					class="pb-1 transition-colors {$page.url.pathname.startsWith('/services')
 						? 'border-b-2 border-blue-600 font-semibold text-blue-600'
 						: 'border-b-2 border-transparent font-medium text-gray-600 hover:text-blue-600'}"
 				>
-					เกี่ยวกับเรา
+					บริการนักศึกษา
 				</a>
 
 				<a
@@ -48,12 +52,12 @@
 
 				<a
 					// eslint-disable-next-line svelte/no-navigation-without-resolve
-					href="/services"
-					class="pb-1 transition-colors {$page.url.pathname.startsWith('/services')
+					href="/about"
+					class="pb-1 transition-colors {$page.url.pathname === '/about'
 						? 'border-b-2 border-blue-600 font-semibold text-blue-600'
 						: 'border-b-2 border-transparent font-medium text-gray-600 hover:text-blue-600'}"
 				>
-					บริการนักศึกษา
+					เกี่ยวกับเรา
 				</a>
 			</div>
 

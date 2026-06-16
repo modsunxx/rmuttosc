@@ -5,6 +5,9 @@
 	// $lib/ เป็น alias ที่ชี้ไปยังโฟลเดอร์ src/lib/ อัตโนมัติ
 	import Navbar from '$lib/components/Navbar.svelte';
 
+	// นำเข้า Footer Component ที่เราเพิ่งสร้างไว้ใน src/lib/components/
+	import Footer from '$lib/components/Footer.svelte';
+
 	let { children } = $props();
 </script>
 
@@ -14,4 +17,6 @@
 	<main class="grow">
 		{@render children()}
 	</main>
+
+	<Footer />
 </div>
