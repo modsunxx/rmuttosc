@@ -8,66 +8,95 @@ import { SUPABASE_SERVICE_ROLE_KEY, COMPLAINT_SECRET_KEY } from '$env/static/pri
 const supabase = createClient(PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 function hashEmail(email: string): string {
-	const hash = crypto
-		.createHmac('sha256', COMPLAINT_SECRET_KEY)
-		.update(email.toLowerCase().trim())
-		.digest('hex');
-	return `usr_${hash.substring(0, 12)}`;
+    const hash = crypto
+        .createHmac('sha256', COMPLAINT_SECRET_KEY)
+        .update(email.toLowerCase().trim())
+        .digest('hex');
+    return `usr_${hash.substring(0, 12)}`;
 }
 
 export const actions = {
-	default: async ({ request }) => {
-		const formData = await request.formData();
-		const category = formData.get('category')?.toString();
-		const topic = formData.get('topic')?.toString();
-		const detail = formData.get('detail')?.toString();
+    default: async ({ request }) => {
+        const formData = await request.formData();
+        const category = formData.get('category')?.toString();
+        const topic = formData.get('topic')?.toString();
+        const detail = formData.get('detail')?.toString();
 
-		// รับ Token ที่ส่งมาจากหน้าเว็บ
-		const accessToken = formData.get('access_token')?.toString();
+        // รับ Token ที่ส่งมาจากหน้าเว็บ
+        const accessToken = formData.get('access_token')?.toString();
 
-		if (!category || !topic || !detail) {
-			return fail(400, { error: 'กรุณากรอกข้อมูลให้ครบถ้วน', success: false });
-		}
+        if (!category || !topic || !detail) {
+            return fail(400, { error: 'กรุณากรอกข้อมูลให้ครบถ้วน', success: false });
+        }
 
-		// ป้องกันกรณีไม่มีการ Login
-		if (!accessToken) {
-			return fail(401, { error: 'ไม่พบข้อมูลการเข้าสู่ระบบ กรุณาเข้าสู่ระบบใหม่', success: false });
-		}
+        // ป้องกันกรณีไม่มีการ Login
+        if (!accessToken) {
+            return fail(401, { error: 'ไม่พบข้อมูลการเข้าสู่ระบบ กรุณาเข้าสู่ระบบใหม่', success: false });
+        }
 
-		// ให้ Supabase ช่วยยืนยันว่า Token นี้เป็นของจริง และเป็นของใคร
-		const {
-			data: { user },
-			error: authError
-		} = await supabase.auth.getUser(accessToken);
+        // ให้ Supabase ช่วยยืนยันว่า Token นี้เป็นของจริง และเป็นของใคร
+        const {
+            data: { user },
+            error: authError
+        } = await supabase.auth.getUser(accessToken);
 
-		if (authError || !user) {
-			return fail(401, {
-				error: 'Session หมดอายุหรือไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่',
-				success: false
-			});
-		}
+        if (authError || !user) {
+            return fail(401, {
+                error: 'Session หมดอายุหรือไม่ถูกต้อง กรุณาเข้าสู่ระบบใหม่',
+                success: false
+            });
+        }
 
-		// ตรวจสอบอีเมลแบบขั้นเด็ดขาดที่ฝั่ง Backend อีกรอบ!
-		const userEmail = user.email || '';
-		if (!userEmail.endsWith('@rmutto.ac.th')) {
-			return fail(403, { error: 'ถูกปฏิเสธ: อนุญาตเฉพาะนักศึกษา RMUTTO เท่านั้น', success: false });
-		}
+        // ตรวจสอบอีเมลแบบขั้นเด็ดขาดที่ฝั่ง Backend อีกรอบ!
+        const userEmail = user.email || '';
+        if (!userEmail.endsWith('@rmutto.ac.th')) {
+            return fail(403, { error: 'ถูกปฏิเสธ: อนุญาตเฉพาะนักศึกษา RMUTTO เท่านั้น', success: false });
+        }
 
-		// นำอีเมลจริงที่ยืนยันแล้วไปทำการเข้ารหัส (ลบ Mock Email ทิ้งได้เลย)
-		const hashedUserId = hashEmail(userEmail);
+        // นำอีเมลจริงที่ยืนยันแล้วไปทำการเข้ารหัส
+        const hashedUserId = hashEmail(userEmail);
 
-		const { error: dbError } = await supabase.from('complaints').insert({
-			hashed_user_id: hashedUserId,
-			category: category,
-			topic: topic,
-			detail: detail
-		});
+        // 1. ส่งข้อมูลเข้า Supabase พร้อมขอข้อมูล (เช่น ID) ที่เพิ่งสร้างกลับมาด้วย
+        const { data: insertedData, error: dbError } = await supabase.from('complaints').insert({
+            hashed_user_id: hashedUserId,
+            category: category,
+            topic: topic,
+            detail: detail,
+            status: 'pending'
+        }).select().single();
 
-		if (dbError) {
-			console.error('Supabase Insert Error:', dbError);
-			return fail(500, { error: 'ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง', success: false });
-		}
+        if (dbError) {
+            console.error('Supabase Insert Error:', dbError);
+            return fail(500, { error: 'ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง', success: false });
+        }
 
-		return { success: true };
-	}
+        // 2. ถ้าเข้า Supabase สำเร็จ ให้ยิงข้อมูลส่งไป Google Sheets ด้วย
+        if (insertedData) {
+            try {
+                // 🚨 สำคัญมาก: เอาลิงก์ Web App URL จาก Google Apps Script มาวางในฟันหนูตรงนี้ครับ 👇
+                const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbz_peLek99-J41wtGNp6l03sZ6gjqTlbR3-iywW-zF2c2Al18f8acfejU3sqdB1Ebnp/exec";
+                
+                await fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: insertedData.id,
+                        hashed_user_id: insertedData.hashed_user_id,
+                        category: insertedData.category,
+                        topic: insertedData.topic,
+                        detail: insertedData.detail,
+                        status: insertedData.status,
+                        created_at: insertedData.created_at
+                    })
+                });
+            } catch (err) {
+                console.error("Google Sheets Sync Error:", err);
+                // แม้จะยิงไป Sheet ไม่สำเร็จ แต่เราก็ปล่อยผ่านเพราะข้อมูลเข้า Supabase อย่างปลอดภัยแล้ว
+            }
+        }
+
+        return { success: true };
+    }
 };
