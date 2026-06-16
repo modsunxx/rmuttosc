@@ -1,3 +1,44 @@
+<script lang="ts">
+	// รับข้อมูลที่ดึงมาจาก +page.server.ts
+	let { data } = $props();
+
+	// ฟังก์ชันแปลงวันที่ให้เป็นภาษาไทยสวยๆ
+	function formatDate(dateString: string) {
+		return new Date(dateString).toLocaleDateString('th-TH', {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit'
+		});
+	}
+
+	// ฟังก์ชันเปลี่ยนสีป้ายสถานะ
+	function getStatusBadge(status: string) {
+		if (status === 'pending') return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+		if (status === 'complete') return 'bg-green-100 text-green-800 border-green-200';
+		return 'bg-gray-100 text-gray-800 border-gray-200';
+	}
+
+	// ฟังก์ชันแปลสถานะเป็นข้อความภาษาไทย
+	function translateStatus(status: string) {
+		if (status === 'pending') return 'กำลังดำเนินการ';
+		if (status === 'complete') return 'เรียบร้อย';
+		return status;
+	}
+
+	// ฟังก์ชันแปลงหมวดหมู่เป็นภาษาไทย
+	function translateCategory(cat: string) {
+		const categories: Record<string, string> = {
+			academic: 'วิชาการ',
+			facilities: 'อาคารสถานที่',
+			security: 'ความปลอดภัย',
+			other: 'อื่นๆ'
+		};
+		return categories[cat] || cat;
+	}
+</script>
+
 <div class="min-h-screen bg-gray-50 px-6 py-12">
 	<div class="mx-auto max-w-6xl">
 		<header class="mb-12 text-center">
@@ -85,6 +126,55 @@
 					<p class="text-gray-600">ติดตามกำหนดการ และกิจกรรมต่างๆ ของสภานักศึกษาตลอดปีการศึกษา</p>
 				</div>
 			</a>
+		</div>
+
+		<div class="mt-20">
+			<div class="mb-8 flex items-center justify-between border-b border-gray-200 pb-4">
+				<h2 class="flex items-center gap-2 text-2xl font-bold text-gray-800">
+					<span class="text-2xl">📢</span> อัปเดตเรื่องร้องเรียนล่าสุด
+				</h2>
+			</div>
+
+			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+				{#each data.complaints as complaint, i (i)}
+					<div
+						class="relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+					>
+						<div class="absolute top-0 left-0 h-1 w-full bg-blue-500"></div>
+
+						<div class="mb-4 flex items-start justify-between">
+							<span class="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-600">
+								{translateCategory(complaint.category)}
+							</span>
+							<span
+								class={`rounded-full border px-2.5 py-1 text-xs font-bold ${getStatusBadge(complaint.status)}`}
+							>
+								{translateStatus(complaint.status)}
+							</span>
+						</div>
+
+						<h3 class="mb-2 line-clamp-1 text-lg font-bold text-gray-800">{complaint.topic}</h3>
+
+						<p class="mb-6 line-clamp-3 grow text-sm leading-relaxed text-gray-600">
+							{complaint.detail}
+						</p>
+
+						<div
+							class="mt-auto flex items-center border-t border-gray-50 pt-4 text-xs font-medium text-gray-400"
+						>
+							🕒 แจ้งเมื่อ: {formatDate(complaint.created_at)}
+						</div>
+					</div>
+				{/each}
+				{#if data.complaints.length === 0}
+					<div
+						class="col-span-full rounded-2xl border border-dashed border-gray-200 bg-white p-10 text-center text-gray-500"
+					>
+						<div class="mb-3 text-4xl">📭</div>
+						ยังไม่มีรายการเรื่องร้องเรียนในขณะนี้
+					</div>
+				{/if}
+			</div>
 		</div>
 	</div>
 </div>
