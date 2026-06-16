@@ -244,6 +244,20 @@
 							></textarea>
 						</div>
 
+						<div>
+							<label for="contact" class="mb-2 block text-sm font-bold text-gray-700"
+								>ช่องทางติดต่อกลับ <span class="text-xs font-normal text-gray-400">(ไม่บังคับ)</span
+								></label
+							>
+							<input
+								type="text"
+								name="contact"
+								id="contact"
+								placeholder="เช่น เบอร์โทรศัพท์, Line ID (หากต้องการให้สภาฯ ติดต่อกลับ)"
+								class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors outline-none focus:ring-2 focus:ring-blue-500"
+							/>
+						</div>
+
 						<div class="pt-4">
 							<button
 								type="submit"
