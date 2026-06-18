@@ -1,5 +1,5 @@
 <script lang="ts">
-	// Mock ข้อมูลกิจกรรม (สามารถเปลี่ยนรูปภาพและข้อความจริงได้ในภายหลัง)
+	// ข้อมูลกิจกรรม 6 รายการ
 	const events = [
 		{
 			id: 1,
@@ -9,9 +9,65 @@
 			image:
 				'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80',
 			excerpt:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+				'ร่วมกันปลูกป่าชายเลนเพื่อฟื้นฟูระบบนิเวศและอนุรักษ์สิ่งแวดล้อมทางทะเล ณ ศูนย์ศึกษาธรรมชาติและอนุรักษ์ป่าชายเลน'
+		},
+		{
+			id: 2,
+			title: 'การเลือกตั้งคณะกรรมการสภานักศึกษา ปี 2569',
+			date: '15 กันยายน 2569',
+			category: 'ประชาธิปไตย',
+			image:
+				'https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?auto=format&fit=crop&w=800&q=80',
+			excerpt:
+				'ขอเชิญชวนนักศึกษา มทร.ตะวันออก ทุกท่าน ร่วมใช้สิทธิลงคะแนนเสียงเลือกตั้งตัวแทนสภานักศึกษา เพื่อขับเคลื่อนมหาวิทยาลัย'
+		},
+		{
+			id: 3,
+			title: 'RMUTTO E-Sports Tournament 2026',
+			date: '10 ตุลาคม 2569',
+			category: 'กีฬา',
+			image:
+				'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
+			excerpt:
+				'การแข่งขันกีฬาอีสปอร์ตสุดยิ่งใหญ่แห่งปี ชิงเงินรางวัลและเป็นตัวแทนมหาวิทยาลัยในการแข่งขันระดับประเทศ'
+		},
+		{
+			id: 4,
+			title: 'ติวเข้มก่อนสอบปลายภาค (Midterm Crisis)',
+			date: '5 พฤศจิกายน 2569',
+			category: 'วิชาการ',
+			image:
+				'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
+			excerpt:
+				'โครงการติวพิเศษรายวิชาพื้นฐานสำหรับน้องๆ ปี 1 โดยรุ่นพี่สภานักศึกษาและศิษย์เก่าที่มาแชร์เทคนิคการทำข้อสอบ'
+		},
+		{
+			id: 5,
+			title: 'เทศกาลดนตรีในสวน Music in the Park',
+			date: '20 ธันวาคม 2569',
+			category: 'นันทนาการ',
+			image:
+				'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=800&q=80',
+			excerpt:
+				'ผ่อนคลายความเครียดจากการเรียน มาร่วมฟังเพลงเพราะๆ ในบรรยากาศสบายๆ พร้อมบูธอาหารจากชมรมต่างๆ'
+		},
+		{
+			id: 6,
+			title: 'อบรมเชิงปฏิบัติการ AI สำหรับนักศึกษา',
+			date: '15 มกราคม 2570',
+			category: 'เทคโนโลยี',
+			image:
+				'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=80',
+			excerpt:
+				'อัปสกิลการใช้งาน AI Tools ยอดฮิตในยุคปัจจุบัน เพื่อนำมาประยุกต์ใช้กับการเรียนและการทำงานในอนาคต'
 		}
 	];
+	let visibleCount = $state(3);
+
+	// ฟังก์ชันเมื่อกดปุ่ม ให้โหลดเพิ่มทีละ 3 งาน
+	function loadMore() {
+		visibleCount += 3;
+	}
 </script>
 
 <svelte:head>
@@ -32,7 +88,7 @@
 
 	<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-			{#each events as event (event.id)}
+			{#each events.slice(0, visibleCount) as event (event.id)}
 				<article
 					class="flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
 				>
@@ -95,13 +151,15 @@
 				</article>
 			{/each}
 		</div>
-
-		<div class="mt-12 text-center">
-			<button
-				class="rounded-full border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
-			>
-				โหลดกิจกรรมเพิ่มเติม
-			</button>
-		</div>
+		{#if visibleCount < events.length}
+			<div class="mt-12 text-center">
+				<button
+					onclick={loadMore}
+					class="rounded-full border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+				>
+					โหลดกิจกรรมเพิ่มเติม
+				</button>
+			</div>
+		{/if}
 	</section>
 </div>
