@@ -21,16 +21,19 @@ export const actions = {
 		const category = formData.get('category')?.toString();
 		const topic = formData.get('topic')?.toString();
 		const detail = formData.get('detail')?.toString();
-
-		// รับค่าช่องทางติดต่อ (ถ้าเขาไม่กรอกมา จะเป็นค่าว่าง)
 		const contact = formData.get('contact')?.toString() || '';
 
-		// รับ Token ที่ส่งมาจากหน้าเว็บ
-		const accessToken = formData.get('access_token')?.toString();
+		// 1. รับค่าไฟล์รูปภาพที่แนบมาจากหน้าบ้าน
+		const imageFile = formData.get('image') as File | null;
+		let imageUrl = '';
 
+		// ป้องกันกรณีไม่ได้กรอกข้อมูลหลัก
 		if (!category || !topic || !detail) {
 			return fail(400, { error: 'กรุณากรอกข้อมูลให้ครบถ้วน', success: false });
 		}
+
+		// รับ Token ที่ส่งมาจากหน้าเว็บ
+		const accessToken = formData.get('access_token')?.toString();
 
 		// ป้องกันกรณีไม่มีการ Login
 		if (!accessToken) {
@@ -56,10 +59,31 @@ export const actions = {
 			return fail(403, { error: 'ถูกปฏิเสธ: อนุญาตเฉพาะนักศึกษา RMUTTO เท่านั้น', success: false });
 		}
 
+		// 2. ถ้ามีการแนบไฟล์รูปมาจริง ให้จัดการอัปโหลดขึ้น Storage
+		if (imageFile && imageFile.size > 0) {
+			const fileExt = imageFile.name.split('.').pop();
+			// ตั้งชื่อไฟล์สุ่มป้องกันชื่อซ้ำกันในระบบ
+			const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+
+			const { error: uploadError } = await supabase.storage
+				.from('complaint_images')
+				.upload(fileName, imageFile);
+
+			if (!uploadError) {
+				// อัปโหลดผ่านฉลุย ดึงลิงก์สาธารณะ (Public URL) ออกมาใช้งาน
+				const { data: publicUrlData } = supabase.storage
+					.from('complaint_images')
+					.getPublicUrl(fileName);
+				imageUrl = publicUrlData.publicUrl;
+			} else {
+				console.error('Supabase Storage Upload Error:', uploadError);
+			}
+		}
+
 		// นำอีเมลจริงที่ยืนยันแล้วไปทำการเข้ารหัส
 		const hashedUserId = hashEmail(userEmail);
 
-		// 1. ส่งข้อมูลเข้า Supabase (เพิ่ม contact เข้าไปด้วย)
+		// 3. ส่งข้อมูลเข้า Supabase (เพิ่มช่อง image_url)
 		const { data: insertedData, error: dbError } = await supabase
 			.from('complaints')
 			.insert({
@@ -67,7 +91,8 @@ export const actions = {
 				category: category,
 				topic: topic,
 				detail: detail,
-				contact: contact, // <--- สั่งเซฟลงคอลัมน์ contact
+				contact: contact,
+				image_url: imageUrl, // <--- บันทึกลิงก์รูปลงฐานข้อมูล
 				status: 'pending'
 			})
 			.select()
@@ -78,7 +103,7 @@ export const actions = {
 			return fail(500, { error: 'ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง', success: false });
 		}
 
-		// 2. ถ้าเข้า Supabase สำเร็จ ให้ยิงข้อมูลส่งไป Google Sheets ด้วย
+		// 4. ถ้าเข้า Supabase สำเร็จ ให้ยิงข้อมูลส่งไป Google Sheets ด้วย
 		if (insertedData) {
 			try {
 				const GOOGLE_SHEET_URL =
@@ -95,9 +120,10 @@ export const actions = {
 						category: insertedData.category,
 						topic: insertedData.topic,
 						detail: insertedData.detail,
-						contact: insertedData.contact, // <--- แนบช่องทางติดต่อส่งไปให้ Sheet ด้วย
+						contact: insertedData.contact,
 						status: insertedData.status,
-						created_at: insertedData.created_at
+						created_at: insertedData.created_at,
+						image_url: insertedData.image_url // <--- ส่งลิงก์รูปไปให้ Google Apps Script บันทึก
 					})
 				});
 			} catch (err) {

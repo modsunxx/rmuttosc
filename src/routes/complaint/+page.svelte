@@ -1,4 +1,3 @@
-<!-- src/routes/complaint/+page.svelte -->
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
@@ -18,7 +17,6 @@
 	let isAuthChecking = $state(true);
 
 	onMount(() => {
-		// เปลี่ยนมาเขียนแบบรับ response เต็มๆ แล้วค่อยดึง session ออกมา
 		supabase.auth.getSession().then((response: { data: { session: Session | null } }) => {
 			const session = response.data.session;
 			checkUserDomain(session);
@@ -30,7 +28,6 @@
 		});
 	});
 
-	// 4. กำหนด Type ให้ parameter session
 	function checkUserDomain(session: Session | null) {
 		if (session?.user) {
 			const email = session.user.email || '';
@@ -78,20 +75,16 @@
 			<p class="text-lg text-gray-600">สภานักศึกษาพร้อมรับฟังและประสานงานแก้ไขปัญหาของคุณ</p>
 		</div>
 
-		<!-- แจ้งเตือน Error จากระบบ Login -->
 		{#if authError}
 			<div class="mb-8 rounded-r-xl border-l-4 border-red-600 bg-red-50 p-4 shadow-sm">
 				<p class="font-bold text-red-700">{authError}</p>
 			</div>
 		{/if}
 
-		<!-- สถานะกำลังโหลดเช็ค Login -->
 		{#if isAuthChecking}
 			<div class="py-10 text-center">
 				<p class="text-gray-500">กำลังตรวจสอบสถานะนักศึกษา...</p>
 			</div>
-
-			<!-- กรณียังไม่ได้ Login -->
 		{:else if !user}
 			<div class="rounded-2xl border border-gray-100 bg-white p-10 text-center shadow-md">
 				<svg
@@ -99,21 +92,21 @@
 					fill="none"
 					stroke="currentColor"
 					viewBox="0 0 24 24"
-					><path
+				>
+					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
 						stroke-width="2"
 						d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-					></path></svg
-				>
+					></path>
+				</svg>
 				<h2 class="mb-2 text-2xl font-bold text-gray-900">ยืนยันตัวตนนักศึกษา</h2>
 				<p class="mb-8 text-gray-600">
 					โปรดเข้าสู่ระบบด้วยอีเมลของมหาวิทยาลัย (@rmutto.ac.th) เพื่อใช้งานระบบร้องเรียน
 				</p>
-
 				<button
 					onclick={loginWithGoogle}
-					class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-8 py-3 text-base font-bold text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+					class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-8 py-3 text-base font-bold text-gray-700 shadow-sm transition-colors hover:bg-gray-50"
 				>
 					<img
 						src="https://www.svgrepo.com/show/475656/google-color.svg"
@@ -123,22 +116,25 @@
 					เข้าสู่ระบบด้วย Google
 				</button>
 			</div>
-
-			<!-- กรณี Login ผ่านแล้ว (โชว์ฟอร์ม) -->
 		{:else}
 			<div
 				class="mb-8 flex items-start justify-between rounded-r-xl border-l-4 border-blue-600 bg-blue-50 p-6 shadow-sm"
 			>
 				<div class="flex">
 					<div class="shrink-0">
-						<svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-							><path
+						<svg
+							class="h-6 w-6 text-blue-600"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
 								stroke-linecap="round"
 								stroke-linejoin="round"
 								stroke-width="2"
 								d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-							/></svg
-						>
+							/>
+						</svg>
 					</div>
 					<div class="ml-4">
 						<h3 class="text-lg font-bold text-blue-800">ยืนยันตัวตนสำเร็จ (Anonymous System)</h3>
@@ -162,13 +158,10 @@
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
-						><path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M5 13l4 4L19 7"
-						></path></svg
 					>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"
+						></path>
+					</svg>
 					<span class="font-medium">ส่งเรื่องร้องเรียนสำเร็จ! สภาฯ จะเร่งดำเนินการตรวจสอบครับ</span>
 				</div>
 			{/if}
@@ -185,6 +178,7 @@
 				<div class="p-8">
 					<form
 						method="POST"
+						enctype="multipart/form-data"
 						use:enhance={() => {
 							isSubmitting = true;
 							return async ({ update }) => {
@@ -194,7 +188,6 @@
 						}}
 						class="space-y-6"
 					>
-						<!-- แนบ Token ไปให้ Server ตรวจสอบด้วยเพื่อความปลอดภัย -->
 						<input type="hidden" name="access_token" value={sessionToken} />
 
 						<div>
@@ -255,6 +248,19 @@
 								id="contact"
 								placeholder="เช่น เบอร์โทรศัพท์, Line ID (หากต้องการให้สภาฯ ติดต่อกลับ)"
 								class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors outline-none focus:ring-2 focus:ring-blue-500"
+							/>
+						</div>
+
+						<div>
+							<label for="image" class="mb-2 block text-sm font-bold text-gray-700">
+								แนบรูปภาพประกอบ <span class="text-xs font-normal text-gray-400">(ไม่บังคับ)</span>
+							</label>
+							<input
+								type="file"
+								name="image"
+								id="image"
+								accept="image/*"
+								class="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 transition-colors outline-none file:mr-4 file:rounded-full file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100 focus:ring-2 focus:ring-blue-500"
 							/>
 						</div>
 
