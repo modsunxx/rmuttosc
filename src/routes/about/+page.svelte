@@ -172,23 +172,26 @@
 	<section class="border-b border-gray-200 bg-white py-16 sm:py-24">
 		<div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
 			<h1 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-				เกี่ยวกับองค์กรของเรา
+				สภานักศึกษา (Student Council)
 			</h1>
-			<p class="mx-auto max-w-2xl text-xl leading-relaxed text-gray-500">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-				labore et dolore magna aliqua.
+			<p class="mb-8 text-2xl font-bold text-blue-600">
+				“ร่วมกันคิด ร่วมกันสร้าง ร่วมกันพัฒนามหาวิทยาลัย”
+			</p>
+			<p class="mx-auto max-w-4xl text-xl leading-relaxed text-gray-500">
+				องค์กรตัวแทนของนักศึกษาที่ทำหน้าที่เป็นศูนย์กลางในการรับฟังความคิดเห็น
+				ดูแลสิทธิและผลประโยชน์ของนักศึกษา
+				รวมถึงเป็นสื่อกลางในการประสานงานระหว่างนักศึกษากับมหาวิทยาลัย เพื่อส่งเสริมคุณภาพชีวิต
+				การพัฒนากิจกรรมนักศึกษา และการพัฒนามหาวิทยาลัยให้ก้าวหน้าอย่างยั่งยืน
 			</p>
 		</div>
 	</section>
 
 	<section class="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
-		<div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+		<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
 			<div
-				class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+				class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
 			>
-				<div
-					class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100"
-				>
+				<div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
 					<svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path
 							stroke-linecap="round"
@@ -205,19 +208,17 @@
 					</svg>
 				</div>
 				<h2 class="mb-4 text-2xl font-bold text-gray-900">วิสัยทัศน์ (Vision)</h2>
-				<p class="leading-relaxed text-gray-600">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis
-					nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-					irure dolor in reprehenderit.
+				<p class="grow leading-relaxed text-gray-600">
+					“สร้างมหาวิทยาลัยที่นักศึกษาทุกคนมีเสียง มีโอกาส มีอนาคตร่วมกันอย่างยั่งยืน
+					เพราะสภานักศึกษาเป็นศูนย์กลางแห่งการมีส่วนร่วม ขับเคลื่อนมหาวิทยาลัยสู่ความยั่งยืน ทันสมัย
+					และเติบโตไปพร้อมนักศึกษา”
 				</p>
 			</div>
 
 			<div
-				class="rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+				class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
 			>
-				<div
-					class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100"
-				>
+				<div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100">
 					<svg
 						class="h-8 w-8 text-indigo-600"
 						fill="none"
@@ -233,12 +234,41 @@
 					</svg>
 				</div>
 				<h2 class="mb-4 text-2xl font-bold text-gray-900">พันธกิจ (Mission)</h2>
-				<p class="leading-relaxed text-gray-600">
-					Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-					nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-					deserunt mollit anim id est laborum.
+				<p class="grow leading-relaxed text-gray-600">
+					“พวกเรามุ่งมั่นพัฒนามหาวิทยาลัยให้เป็นพื้นที่แห่งโอกาส การเรียนรู้ และความเท่าเทียม
+					โดยยึดนักศึกษาเป็นศูนย์กลาง เปิดรับทุกความคิดเห็น ส่งเสริมศักยภาพของนักศึกษาในทุกด้าน
+					พร้อมขับเคลื่อนมหาวิทยาลัยไปสู่อนาคตที่ทันสมัย เป็นมิตรต่อสิ่งแวดล้อม
+					และเติบโตอย่างยั่งยืนร่วมกัน”
 				</p>
 			</div>
+		</div>
+
+		<div
+			class="mt-8 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+		>
+			<div
+				class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-green-100"
+			>
+				<svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+					/>
+				</svg>
+			</div>
+			<h2 class="mb-4 text-2xl font-bold text-gray-900">หน้าที่หลัก (Main duties)</h2>
+			<p class="mx-auto max-w-5xl leading-relaxed text-gray-600">
+				การพิทักษ์สิทธิและผลประโยชน์ของนักศึกษา
+				การรับฟังข้อคิดเห็นและเรื่องร้องทุกข์จากนักศึกษาเพื่อเสนอแนะแนวทางแก้ไข
+				การตรวจสอบและกำกับดูแลการดำเนินงานขององค์การนักศึกษา สโมสรนักศึกษา ชมรม และชุมนุม
+				ให้เป็นไปตามวัตถุประสงค์และงบประมาณที่ได้รับ
+				รวมถึงเสนอความคิดเห็นหรือข้อเสนอแนะที่เป็นประโยชน์ต่อมหาวิทยาลัยและนักศึกษา
+				นอกจากนี้ยังมีหน้าที่พิจารณาโครงการและงบประมาณด้านกิจกรรมนักศึกษา
+				ไกล่เกลี่ยข้อขัดแย้งในการดำเนินกิจกรรม ติดตามและประเมินผลการดำเนินงาน
+				ตลอดจนปฏิบัติหน้าที่อื่นตามที่มหาวิทยาลัยมอบหมาย
+			</p>
 		</div>
 	</section>
 
