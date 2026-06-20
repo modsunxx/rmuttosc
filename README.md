@@ -1,42 +1,35 @@
-# sv
+# 🎓 RMUTTO Student Council Website (เว็บไซต์สภานักศึกษา มทร.ตะวันออก)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+แพลตฟอร์มเว็บไซต์อย่างเป็นทางการของสภานักศึกษา มหาวิทยาลัยเทคโนโลยีราชมงคลตะวันออก (RMUTTO) สร้างขึ้นเพื่อเป็นศูนย์กลางในการกระจายข่าวสาร รวบรวมเอกสารแบบฟอร์มต่างๆ และรับฟังปัญหาของนักศึกษาผ่านระบบร้องเรียนแบบนิรนาม
 
-## Creating a project
+## ✨ ฟีเจอร์หลัก (Key Features)
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **📰 ข่าวสารและกิจกรรม (Events):** ติดตามความเคลื่อนไหวและโครงการต่างๆ ของสภานักศึกษา
+- **👥 ทำเนียบคณะกรรมการ (About Us):** ข้อมูลวิสัยทัศน์ พันธกิจ และรายชื่อคณะกรรมการสภานักศึกษา
+- **📁 ระบบดาวน์โหลดเอกสาร (Document Center):** รวบรวมแบบฟอร์มคำร้อง, เอกสารชมรม และข้อบังคับต่างๆ จัดหมวดหมู่แบบ Sub-folder ค้นหาง่าย
+- **🕵️ ระบบร้องเรียนนิรนาม (Anonymous Complaints):** - ระบบยืนยันตัวตนด้วยอีเมลมหาวิทยาลัย (`@rmutto.ac.th`)
+  - เข้ารหัสข้อมูลผู้แจ้งเพื่อความปลอดภัยและปกปิดตัวตน (Anonymous)
+  - รองรับการแนบไฟล์รูปภาพประกอบปัญหา
+  - ซิงค์ข้อมูลเข้าฐานข้อมูลหลัก (Supabase) และสำรองข้อมูลลง Google Sheets แบบ Real-time
 
-```sh
-# create a new project
-npx sv create my-app
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
+
+- **Frontend & Backend:** [SvelteKit](https://kit.svelte.dev/) (TypeScript)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Database, Auth & Storage:** [Supabase](https://supabase.com/) (PostgreSQL)
+- **Data Sync:** Google Apps Script & Google Sheets Webhooks
+- **Deployment:** [Vercel](https://vercel.com/) (แนะนำ)
+
+---
+
+## 🚀 การติดตั้งและรันโปรเจกต์ (Getting Started)
+
+### 1. โคลนโปรเจกต์และติดตั้ง Dependencies
+
+เปิด Terminal แล้วรันคำสั่งต่อไปนี้:
+
+```bash
+git clone <your-repository-url>
+cd studentrmutto
+npm install
 ```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.15.3 create --template minimal --types ts --add prettier eslint tailwindcss="plugins:typography,forms" --install npm studentrmutto
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
