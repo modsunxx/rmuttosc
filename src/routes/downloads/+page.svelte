@@ -108,6 +108,15 @@
 					filename: 'regulation-discipline-2549.pdf',
 					iconColor: 'text-red-500',
 					bgColor: 'bg-red-50'
+				},
+				{
+					id: 16,
+					title: 'ประกาศฯ เรื่อง การจัดกิจกรรมสานสัมพันธ์นักศึกษา (รับน้อง)',
+					date: 'ปีการศึกษา 2569',
+					type: 'PDF',
+					filename: 'announcement-freshmen-2569.pdf',
+					iconColor: 'text-red-500',
+					bgColor: 'bg-red-50'
 				}
 			]
 		},

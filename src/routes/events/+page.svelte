@@ -1,34 +1,41 @@
 <script lang="ts">
-	// โครงสร้างข้อมูลกิจกรรม (มีแค่ชื่อ วันที่ และรูปภาพ ก็เฟี้ยวได้!)
+	// โครงสร้างข้อมูลกิจกรรม (เพิ่มช่อง driveLink สำหรับใส่ลิงก์รูปเต็ม)
 	const events = [
 		{
 			id: 'leadership-camp',
 			title: 'โครงการพัฒนาผู้นำนักศึกษา (จังหวัดระยอง)',
-			date: '25 พฤษภาคม 2569',
-			coverImage:
-				'/images/events/โครงการพัฒนาผู้นำนักศึกษา (จังหวัดระยอง)/ไฟล์ - 2026-05-25T13_43_06(16).358Z', // เดี๋ยวเราเอารูปไปใส่ในโฟลเดอร์ static/images/events/
-			photoCount: 12 // สมมติว่าอัลบั้มนี้มีกี่รูป
+			date: '20 - 22 พฤษภาคม 2569',
+			coverImage: '/images/leadership/cover.jpg', // ปรับชื่อนามสกุลไฟล์ให้เรียบร้อยครับ
+			photoCount: 226,
+			driveLink:
+				'https://drive.google.com/drive/folders/1rXLktyaZ_sZEnyFXunWSJYKVQ9tLTzTB?usp=drive_link' // 🔗 ใส่ลิงก์ Drive งานนี้ตรงนี้
 		},
 		{
 			id: 'council-meeting-q2',
 			title: 'ประชุมสภา ไตรมาส 2',
 			date: '30 พฤษภาคม 2569',
-			coverImage: '/images/events/meeting-cover.jpg',
-			photoCount: 8
+			coverImage: '/images/meeting/cover.jpg',
+			photoCount: 73,
+			driveLink:
+				'https://drive.google.com/drive/folders/1StEiwz-MD2Ymybxn-OKo13ZcDTl8g7F7?usp=drive_link' // 🔗 ใส่ลิงก์ Drive งานนี้ตรงนี้
 		},
 		{
 			id: 'sut-exchange',
 			title: 'มทร.ตะวันออก ต้อนรับ มทส. แลกเปลี่ยนเรียนรู้และเสริมประสิทธิภาพ',
 			date: '18 มิถุนายน 2569',
-			coverImage: '/images/events/sut-exchange-cover.jpg',
-			photoCount: 24
+			coverImage: '/images/sut-exchange/cover.jpg',
+			photoCount: 90,
+			driveLink:
+				'https://drive.google.com/drive/folders/1J_g5cRSrHtdmA1rgl3Qd7UYu2vd3HfAu?usp=drive_link' // 🔗 ใส่ลิงก์ Drive งานนี้ตรงนี้
 		},
 		{
 			id: 'council-9r',
 			title: 'สภา 9R',
 			date: '11 มิถุนายน 2569',
-			coverImage: '/images/events/council-9r-cover.jpg',
-			photoCount: 15
+			coverImage: '/images/council-9r/cover.jpg',
+			photoCount: 754,
+			driveLink:
+				'https://drive.google.com/drive/folders/1X9AnobCrW1VLso2dO_phD82HXrn4svqm?usp=drive_link' // 🔗 ใส่ลิงก์ Drive งานนี้ตรงนี้
 		}
 	];
 </script>
@@ -62,26 +69,27 @@
 	<section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
 			{#each events as event (event.id)}
-				<div
-					class="group relative cursor-pointer overflow-hidden rounded-2xl bg-gray-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
+				<a
+					href={event.driveLink}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group relative block aspect-4/3 overflow-hidden rounded-2xl bg-gray-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl"
 				>
-					<div class="aspect-w-4 aspect-h-3 w-full">
-						<img
-							src={event.coverImage}
-							alt={event.title}
-							class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-							onerror={(e) =>
-								((e.currentTarget as HTMLImageElement).src =
-									'https://placehold.co/800x600/e2e8f0/64748b?text=RMUTTO+Events')}
-						/>
-					</div>
+					<img
+						src={event.coverImage}
+						alt={event.title}
+						class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+						onerror={(e) =>
+							((e.currentTarget as HTMLImageElement).src =
+								'https://placehold.co/800x600/e2e8f0/64748b?text=RMUTTO+Events')}
+					/>
 
 					<div
-						class="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"
+						class="absolute inset-0 bg-linear-to-t from-black/95 via-black/50 to-transparent"
 					></div>
 
 					<div class="absolute right-0 bottom-0 left-0 p-6">
-						<div class="mb-2 flex items-center gap-3">
+						<div class="mb-2 flex flex-wrap items-center gap-3">
 							<span
 								class="inline-flex items-center rounded-full bg-blue-500/90 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm"
 							>
@@ -107,11 +115,11 @@
 								{event.photoCount} รูป
 							</span>
 						</div>
-						<h3 class="text-xl leading-snug font-bold text-white drop-shadow-md">
+						<h3 class="mt-1 text-xl leading-snug font-bold text-white drop-shadow-md">
 							{event.title}
 						</h3>
 					</div>
-				</div>
+				</a>
 			{/each}
 		</div>
 	</section>
