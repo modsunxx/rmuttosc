@@ -1,15 +1,19 @@
 <script lang="ts">
-	// 💡 นำข้อมูลจาก Google Sheet มาจัดเรียงเป็น Array ในนี้
-	// วิธีนี้ปลอดภัย 100% เพราะ User จะเห็นแค่หน้าเว็บ ไม่มีทางรู้ลิงก์ Sheet ของเราเลยครับ
+	import { SvelteDate } from 'svelte/reactivity'; // 💡 1. นำเข้าเครื่องมือ SvelteDate มาใช้
+
+	// 💡 2. เปลี่ยนจาก new Date() เป็น new SvelteDate()
+	const today = new SvelteDate();
+	today.setHours(0, 0, 0, 0);
+
 	const timelineEvents = [
-		// --- เดือนเมษายน (ผ่านไปแล้ว) ---
+		// --- เดือนเมษายน ---
 		{
 			id: 1,
 			title: 'โครงการวันอนุรักษ์มรดกไทย ประจำปี 2569',
 			date: '2 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-02'
 		},
 		{
 			id: 2,
@@ -17,7 +21,7 @@
 			date: '2 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-02'
 		},
 		{
 			id: 3,
@@ -25,7 +29,7 @@
 			date: '1–10 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-10' // 📌 ใช้เวลาวันสุดท้ายคือวันที่ 10
 		},
 		{
 			id: 4,
@@ -33,7 +37,7 @@
 			date: '16–17 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-17' // 📌 ใช้เวลาวันสุดท้ายคือวันที่ 17
 		},
 		{
 			id: 5,
@@ -42,7 +46,7 @@
 			date: '18 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-18'
 		},
 		{
 			id: 6,
@@ -51,7 +55,7 @@
 			date: '21 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-21'
 		},
 		{
 			id: 7,
@@ -59,17 +63,17 @@
 			date: 'ยังไม่กำหนด (เมษายน 2569)',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-04-30' // 📌 ใช้เวลาวันสิ้นเดือนไปก่อน
 		},
 
-		// --- เดือนมิถุนายน (ผ่านไปแล้ว) ---
+		// --- เดือนมิถุนายน ---
 		{
 			id: 8,
 			title: 'โครงการวันเฉลิมพระชนมพรรษาสมเด็จพระนางเจ้าสุทิดา พัชรสุธาพิมลลักษณ พระบรมราชินี',
 			date: '2 มิถุนายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-06-02'
 		},
 		{
 			id: 9,
@@ -77,7 +81,7 @@
 			date: '8-10 มิถุนายน 2569',
 			description: '',
 			department: 'สภานักศึกษา',
-			isUpcoming: false
+			compareDate: '2026-06-10' // 📌 ใช้เวลาวันสุดท้ายคือวันที่ 10
 		},
 		{
 			id: 10,
@@ -85,17 +89,17 @@
 			date: '11 มิถุนายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: false
+			compareDate: '2026-06-11'
 		},
 
-		// --- เดือนกรกฎาคม (กำลังจะมาถึง 🟢) ---
+		// --- เดือนกรกฎาคม ---
 		{
 			id: 11,
 			title: 'โครงการสืบสานประเพณีแห่เทียนพรรษา',
 			date: '16–17, 22 กรกฎาคม 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-07-22' // 📌 ใช้เวลาวันสุดท้ายที่จัดงานคือวันที่ 22
 		},
 		{
 			id: 12,
@@ -103,7 +107,7 @@
 			date: '24 กรกฎาคม 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-07-24'
 		},
 		{
 			id: 13,
@@ -111,7 +115,7 @@
 			date: '24 กรกฎาคม 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-07-24'
 		},
 		{
 			id: 14,
@@ -119,7 +123,7 @@
 			date: '25 กรกฎาคม 2569',
 			description: '',
 			department: 'สภานักศึกษา',
-			isUpcoming: true
+			compareDate: '2026-07-25'
 		},
 		{
 			id: 15,
@@ -127,7 +131,7 @@
 			date: '27 กรกฎาคม 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-07-27'
 		},
 		{
 			id: 16,
@@ -135,10 +139,10 @@
 			date: 'ยังไม่กำหนด (กรกฎาคม 2569)',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-07-31'
 		},
 
-		// --- เดือนสิงหาคม (กำลังจะมาถึง 🟢) ---
+		// --- เดือนสิงหาคม ---
 		{
 			id: 17,
 			title:
@@ -146,7 +150,7 @@
 			date: '11 สิงหาคม 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-08-11'
 		},
 		{
 			id: 18,
@@ -155,17 +159,17 @@
 			date: 'ยังไม่กำหนด (สิงหาคม 2569)',
 			description: '',
 			department: 'สภานักศึกษา',
-			isUpcoming: true
+			compareDate: '2026-08-31'
 		},
 
-		// --- เดือนกันยายน (กำลังจะมาถึง 🟢) ---
+		// --- เดือนกันยายน ---
 		{
 			id: 19,
 			title: 'โครงการประชุมสภานักศึกษา ประจำไตรมาส 4 ปีงบประมาณ 2569',
 			date: '12 กันยายน 2569',
 			description: '',
 			department: 'สภานักศึกษา',
-			isUpcoming: true
+			compareDate: '2026-09-12'
 		},
 		{
 			id: 20,
@@ -173,7 +177,7 @@
 			date: '15 กันยายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-09-15'
 		},
 		{
 			id: 21,
@@ -181,7 +185,7 @@
 			date: '16 กันยายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-09-16'
 		},
 		{
 			id: 22,
@@ -189,7 +193,7 @@
 			date: 'ยังไม่กำหนด (กันยายน 2569)',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-09-30'
 		},
 		{
 			id: 23,
@@ -197,7 +201,7 @@
 			date: 'ยังไม่กำหนด (กันยายน 2569)',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			isUpcoming: true
+			compareDate: '2026-09-30'
 		}
 	];
 </script>
@@ -208,7 +212,6 @@
 
 <div class="min-h-screen bg-gray-50 px-6 py-12">
 	<div class="mx-auto max-w-4xl rounded-2xl border-t-4 border-orange-500 bg-white p-8 shadow-sm">
-		<!-- Header -->
 		<div class="mb-2 flex items-center gap-4">
 			<div class="rounded-full bg-orange-100 p-3 text-orange-500">
 				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,29 +227,29 @@
 		</div>
 		<p class="mb-10 ml-14 text-gray-600">กำหนดการและกิจกรรมที่น่าสนใจตลอดปีการศึกษา</p>
 
-		<!-- Timeline Loop -->
 		<div class="mt-8">
 			{#each timelineEvents as event, index (event.id)}
+				{@const isUpcoming = new Date(event.compareDate) >= today}
+
 				<div class="flex">
-					<!-- เส้นกราฟิก Timeline ฝั่งซ้าย -->
 					<div class="flex w-12 shrink-0 flex-col items-center">
-						<!-- จุดวงกลมเปลี่ยนสีตามสถานะ isUpcoming -->
 						<div
-							class="z-10 mt-1 h-5 w-5 rounded-full {event.isUpcoming
+							class="z-10 mt-1 h-5 w-5 rounded-full {isUpcoming
 								? 'bg-orange-500'
-								: 'bg-gray-300'} shadow-sm"
+								: 'bg-gray-300'} shadow-sm transition-colors duration-300"
 						></div>
-						<!-- วาดเส้นเชื่อมลงมาด้านล่าง (ยกเว้นอันสุดท้ายไม่ต้องวาดเส้น) -->
+
 						{#if index !== timelineEvents.length - 1}
 							<div
-								class="-mt-1 h-full w-0.5 {event.isUpcoming ? 'bg-orange-200' : 'bg-gray-200'}"
+								class="-mt-1 h-full w-0.5 {isUpcoming
+									? 'bg-orange-200'
+									: 'bg-gray-200'} transition-colors duration-300"
 							></div>
 						{/if}
 					</div>
 
-					<!-- เนื้อหากิจกรรมฝั่งขวา -->
 					<div class="flex-1 pt-0.5 pb-10 pl-2">
-						{#if event.isUpcoming}
+						{#if isUpcoming}
 							<span
 								class="mb-2 inline-block rounded-full bg-orange-100 px-3 py-1 text-xs font-bold tracking-wider text-orange-700 uppercase"
 							>
@@ -254,29 +257,27 @@
 							</span>
 						{/if}
 
-						<h3
-							class="mt-1 text-xl font-bold {event.isUpcoming ? 'text-gray-800' : 'text-gray-500'}"
-						>
+						<h3 class="mt-1 text-xl font-bold {isUpcoming ? 'text-gray-800' : 'text-gray-500'}">
 							{event.title}
 						</h3>
 
-						<!-- 💡 เพิ่มป้ายชื่อหน่วยงานตรงนี้ -->
 						<span
-							class="mt-1 mb-2 inline-block rounded-md border border-blue-100 bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600"
+							class="mt-1 mb-2 inline-block rounded-md {event.department === 'สภานักศึกษา'
+								? 'border border-blue-100 bg-blue-50 text-blue-600'
+								: 'border border-gray-200 bg-gray-100 text-gray-600'} px-2 py-0.5 text-xs font-medium"
 						>
 							จัดโดย: {event.department}
 						</span>
+
 						<p
-							class="mb-3 text-sm font-semibold {event.isUpcoming
-								? 'text-orange-600'
-								: 'text-gray-500'}"
+							class="mb-3 text-sm font-semibold {isUpcoming ? 'text-orange-600' : 'text-gray-500'}"
 						>
 							📅 {event.date}
 						</p>
 
 						{#if event.description}
 							<p
-								class="leading-relaxed {event.isUpcoming
+								class="leading-relaxed {isUpcoming
 									? 'rounded-lg border border-gray-100 bg-gray-50 p-4 text-gray-600 shadow-sm'
 									: 'text-gray-500'}"
 							>
