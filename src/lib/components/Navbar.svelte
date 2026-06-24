@@ -20,7 +20,7 @@
                     <img 
                         src="/rmuttosclogo_nobg.png" 
                         alt="โลโก้สภานักศึกษา RMUTTO" 
-                        class="h-10 w-auto object-contain drop-shadow-sm transition-all duration-500 dark:drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]" 
+                        class="h-40 w-auto object-contain drop-shadow-sm transition-all duration-500 dark:drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]" 
                     />
                 </a>
             </div>
