@@ -1,15 +1,7 @@
 <script lang="ts">
 	const teamMembers = [
-		{
-			name: 'นายอนัส ด้วงฟู',
-			role: 'ประธานสภานักศึกษา',
-			img: '/team/นายอนัส ด้วงฟู.jpeg'
-		},
-		{
-			name: 'นายณัฏฐ์ชย บุญส่ง',
-			role: 'รองประธานสภานักศึกษา',
-			img: '/team/นายณัฏฐ์ชย บุญส่ง.png'
-		},
+		{ name: 'นายอนัส ด้วงฟู', role: 'ประธานสภานักศึกษา', img: '/team/นายอนัส ด้วงฟู.jpeg' },
+		{ name: 'นายณัฏฐ์ชย บุญส่ง', role: 'รองประธานสภานักศึกษา', img: '/team/นายณัฏฐ์ชย บุญส่ง.png' },
 		{
 			name: 'นางสาวตุลยามาศ บูโฮม',
 			role: 'รองประธานสภานักศึกษา',
@@ -168,16 +160,22 @@
 	<title>เกี่ยวกับเรา | สภานักศึกษา RMUTTO</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-50 pb-20">
-	<section class="border-b border-gray-200 bg-white py-16 sm:py-24">
+<div class="min-h-screen bg-gray-50 pb-20 transition-colors duration-500 dark:bg-gray-950">
+	<section
+		class="border-b border-gray-200 bg-white py-16 transition-colors duration-500 sm:py-24 dark:border-gray-800 dark:bg-gray-900/50"
+	>
 		<div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-			<h1 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+			<h1
+				class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 transition-colors duration-300 sm:text-5xl dark:text-white"
+			>
 				สภานักศึกษา (Student Council)
 			</h1>
-			<p class="mb-8 text-2xl font-bold text-blue-600">
+			<p class="mb-8 text-2xl font-bold text-blue-600 dark:text-blue-400">
 				“ร่วมกันคิด ร่วมกันสร้าง ร่วมกันพัฒนามหาวิทยาลัย”
 			</p>
-			<p class="mx-auto max-w-4xl text-xl leading-relaxed text-gray-500">
+			<p
+				class="mx-auto max-w-4xl text-xl leading-relaxed text-gray-500 transition-colors duration-300 dark:text-gray-400"
+			>
 				องค์กรตัวแทนของนักศึกษาที่ทำหน้าที่เป็นศูนย์กลางในการรับฟังความคิดเห็น
 				ดูแลสิทธิและผลประโยชน์ของนักศึกษา
 				รวมถึงเป็นสื่อกลางในการประสานงานระหว่างนักศึกษากับมหาวิทยาลัย เพื่อส่งเสริมคุณภาพชีวิต
@@ -189,10 +187,17 @@
 	<section class="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
 			<div
-				class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+				class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md dark:border-gray-700/50 dark:bg-gray-800/50 dark:backdrop-blur-sm"
 			>
-				<div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
-					<svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<div
+					class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 transition-colors duration-300 dark:bg-blue-900/40"
+				>
+					<svg
+						class="h-8 w-8 text-blue-600 dark:text-blue-400"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+					>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
@@ -207,8 +212,14 @@
 						/>
 					</svg>
 				</div>
-				<h2 class="mb-4 text-2xl font-bold text-gray-900">วิสัยทัศน์ (Vision)</h2>
-				<p class="grow leading-relaxed text-gray-600">
+				<h2
+					class="mb-4 text-2xl font-bold text-gray-900 transition-colors duration-300 dark:text-white"
+				>
+					วิสัยทัศน์ (Vision)
+				</h2>
+				<p
+					class="grow leading-relaxed text-gray-600 transition-colors duration-300 dark:text-gray-300"
+				>
 					“สร้างมหาวิทยาลัยที่นักศึกษาทุกคนมีเสียง มีโอกาส มีอนาคตร่วมกันอย่างยั่งยืน
 					เพราะสภานักศึกษาเป็นศูนย์กลางแห่งการมีส่วนร่วม ขับเคลื่อนมหาวิทยาลัยสู่ความยั่งยืน ทันสมัย
 					และเติบโตไปพร้อมนักศึกษา”
@@ -216,11 +227,13 @@
 			</div>
 
 			<div
-				class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+				class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md dark:border-gray-700/50 dark:bg-gray-800/50 dark:backdrop-blur-sm"
 			>
-				<div class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100">
+				<div
+					class="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 transition-colors duration-300 dark:bg-indigo-900/40"
+				>
 					<svg
-						class="h-8 w-8 text-indigo-600"
+						class="h-8 w-8 text-indigo-600 dark:text-indigo-400"
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
@@ -233,8 +246,14 @@
 						/>
 					</svg>
 				</div>
-				<h2 class="mb-4 text-2xl font-bold text-gray-900">พันธกิจ (Mission)</h2>
-				<p class="grow leading-relaxed text-gray-600">
+				<h2
+					class="mb-4 text-2xl font-bold text-gray-900 transition-colors duration-300 dark:text-white"
+				>
+					พันธกิจ (Mission)
+				</h2>
+				<p
+					class="grow leading-relaxed text-gray-600 transition-colors duration-300 dark:text-gray-300"
+				>
 					“พวกเรามุ่งมั่นพัฒนามหาวิทยาลัยให้เป็นพื้นที่แห่งโอกาส การเรียนรู้ และความเท่าเทียม
 					โดยยึดนักศึกษาเป็นศูนย์กลาง เปิดรับทุกความคิดเห็น ส่งเสริมศักยภาพของนักศึกษาในทุกด้าน
 					พร้อมขับเคลื่อนมหาวิทยาลัยไปสู่อนาคตที่ทันสมัย เป็นมิตรต่อสิ่งแวดล้อม
@@ -244,12 +263,17 @@
 		</div>
 
 		<div
-			class="mt-8 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+			class="mt-8 rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md dark:border-gray-700/50 dark:bg-gray-800/50 dark:backdrop-blur-sm"
 		>
 			<div
-				class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-green-100"
+				class="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 transition-colors duration-300 dark:bg-green-900/40"
 			>
-				<svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<svg
+					class="h-8 w-8 text-green-600 dark:text-green-400"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
@@ -258,8 +282,14 @@
 					/>
 				</svg>
 			</div>
-			<h2 class="mb-4 text-2xl font-bold text-gray-900">หน้าที่หลัก (Main duties)</h2>
-			<p class="mx-auto max-w-5xl leading-relaxed text-gray-600">
+			<h2
+				class="mb-4 text-2xl font-bold text-gray-900 transition-colors duration-300 dark:text-white"
+			>
+				หน้าที่หลัก (Main duties)
+			</h2>
+			<p
+				class="mx-auto max-w-5xl leading-relaxed text-gray-600 transition-colors duration-300 dark:text-gray-300"
+			>
 				การพิทักษ์สิทธิและผลประโยชน์ของนักศึกษา
 				การรับฟังข้อคิดเห็นและเรื่องร้องทุกข์จากนักศึกษาเพื่อเสนอแนะแนวทางแก้ไข
 				การตรวจสอบและกำกับดูแลการดำเนินงานขององค์การนักศึกษา สโมสรนักศึกษา ชมรม และชุมนุม
@@ -274,22 +304,34 @@
 
 	<section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 		<div class="mb-16 text-center">
-			<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">ทำเนียบคณะกรรมการ</h2>
-			<p class="mt-4 text-lg text-gray-500">คณะกรรมการสภานักศึกษา ประจำปีการศึกษา 2569</p>
+			<h2
+				class="text-3xl font-extrabold text-gray-900 transition-colors duration-300 sm:text-4xl dark:text-white"
+			>
+				ทำเนียบคณะกรรมการ
+			</h2>
+			<p class="mt-4 text-lg text-gray-500 transition-colors duration-300 dark:text-gray-400">
+				คณะกรรมการสภานักศึกษา ประจำปีการศึกษา 2569
+			</p>
 		</div>
 
 		<div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
 			{#each teamMembers as member (member.name)}
 				<div
-					class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+					class="flex flex-col items-center rounded-2xl border border-gray-100 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg dark:border-gray-700/50 dark:bg-gray-800/40 dark:hover:shadow-blue-900/20"
 				>
 					<img
-						class="mb-4 h-32 w-32 rounded-full border-4 border-gray-50 object-cover shadow-sm"
+						class="mb-4 h-32 w-32 rounded-full border-4 border-gray-50 object-cover shadow-sm transition-colors duration-300 dark:border-gray-700"
 						src={member.img}
 						alt={member.name}
 					/>
-					<h3 class="mb-1 text-xl font-bold text-gray-900">{member.name}</h3>
-					<p class="font-medium text-blue-600">{member.role}</p>
+					<h3
+						class="mb-1 text-xl font-bold text-gray-900 transition-colors duration-300 dark:text-white"
+					>
+						{member.name}
+					</h3>
+					<p class="font-medium text-blue-600 transition-colors duration-300 dark:text-blue-400">
+						{member.role}
+					</p>
 				</div>
 			{/each}
 		</div>

@@ -31,23 +31,33 @@
 
 <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
 	<div class="mb-10 text-center">
-		<h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">คำถามที่พบบ่อย (FAQ)</h2>
-		<p class="mt-4 text-lg text-gray-500">ข้อสงสัยเกี่ยวกับการทำงานของสภานักศึกษาและบริการต่างๆ</p>
+		<h2
+			class="text-3xl font-extrabold text-gray-900 transition-colors duration-300 sm:text-4xl dark:text-white"
+		>
+			คำถามที่พบบ่อย (FAQ)
+		</h2>
+		<p class="mt-4 text-lg text-gray-500 transition-colors duration-300 dark:text-gray-400">
+			ข้อสงสัยเกี่ยวกับการทำงานของสภานักศึกษาและบริการต่างๆ
+		</p>
 	</div>
 
 	<div class="space-y-4">
 		{#each faqs as faq, index (index)}
 			<div
-				class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-200 hover:shadow-md"
+				class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md dark:border-gray-700/50 dark:bg-gray-800/60 dark:backdrop-blur-sm"
 			>
 				<button
 					class="flex w-full items-center justify-between px-6 py-5 text-left focus:outline-none"
 					onclick={() => toggle(index)}
 				>
-					<span class="pr-4 text-lg font-semibold text-gray-900">{faq.question}</span>
+					<span
+						class="pr-4 text-lg font-semibold text-gray-900 transition-colors duration-300 dark:text-gray-100"
+					>
+						{faq.question}
+					</span>
 
 					<span
-						class="ml-6 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600"
+						class="ml-6 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-50 text-blue-600 transition-colors duration-300 dark:bg-blue-900/40 dark:text-blue-400"
 					>
 						<svg
 							class="h-5 w-5 transform transition-transform duration-300 {activeIndex === index
@@ -69,7 +79,7 @@
 
 				{#if activeIndex === index}
 					<div
-						class="border-t border-gray-50 bg-white px-6 pt-4 pb-6 leading-relaxed text-gray-600"
+						class="border-t border-gray-50 bg-white px-6 pt-4 pb-6 leading-relaxed text-gray-600 transition-colors duration-300 dark:border-gray-700/50 dark:bg-transparent dark:text-gray-300"
 					>
 						<p>{faq.answer}</p>
 					</div>
