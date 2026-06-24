@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { SvelteDate } from 'svelte/reactivity'; // 💡 1. นำเข้าเครื่องมือ SvelteDate มาใช้
+	import { SvelteDate } from 'svelte/reactivity';
 
-	// 💡 2. เปลี่ยนจาก new Date() เป็น new SvelteDate()
 	const today = new SvelteDate();
 	today.setHours(0, 0, 0, 0);
 
@@ -29,7 +28,7 @@
 			date: '1–10 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			compareDate: '2026-04-10' // 📌 ใช้เวลาวันสุดท้ายคือวันที่ 10
+			compareDate: '2026-04-10'
 		},
 		{
 			id: 4,
@@ -37,7 +36,7 @@
 			date: '16–17 เมษายน 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			compareDate: '2026-04-17' // 📌 ใช้เวลาวันสุดท้ายคือวันที่ 17
+			compareDate: '2026-04-17'
 		},
 		{
 			id: 5,
@@ -63,7 +62,7 @@
 			date: 'ยังไม่กำหนด (เมษายน 2569)',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			compareDate: '2026-04-30' // 📌 ใช้เวลาวันสิ้นเดือนไปก่อน
+			compareDate: '2026-04-30'
 		},
 
 		// --- เดือนมิถุนายน ---
@@ -81,7 +80,7 @@
 			date: '8-10 มิถุนายน 2569',
 			description: '',
 			department: 'สภานักศึกษา',
-			compareDate: '2026-06-10' // 📌 ใช้เวลาวันสุดท้ายคือวันที่ 10
+			compareDate: '2026-06-10'
 		},
 		{
 			id: 10,
@@ -99,7 +98,7 @@
 			date: '16–17, 22 กรกฎาคม 2569',
 			description: '',
 			department: 'หน่วยงานมหาวิทยาลัย',
-			compareDate: '2026-07-22' // 📌 ใช้เวลาวันสุดท้ายที่จัดงานคือวันที่ 22
+			compareDate: '2026-07-22'
 		},
 		{
 			id: 12,
@@ -209,24 +208,23 @@
 <svelte:head>
 	<title>ปฏิทินกิจกรรม | สภานักศึกษา RMUTTO</title>
 </svelte:head>
-<!-- 1. คลุมด้วย relative และ overflow-hidden พร้อมใส่ bg-white ตามแบบ -->
 
-<div class="min-h-screen bg-gray-50 px-6 py-12">
-	<div class="mx-auto max-w-4xl rounded-2xl border-t-4 border-orange-500 bg-white p-8 shadow-sm">
+<!-- 💡 1. พื้นหลังหลักของหน้า -->
+<div class="min-h-screen bg-gray-50 px-6 py-12 transition-colors duration-500 dark:bg-gray-950">
+	
+	<!-- 💡 2. ตัวการ์ดปฏิทิน (เพิ่มพื้นหลังโปร่งแสงและเส้นขอบในโหมดมืด) -->
+	<div class="mx-auto max-w-4xl rounded-2xl border-t-4 border-orange-500 bg-white p-8 shadow-sm transition-colors duration-300 dark:bg-gray-800/50 dark:backdrop-blur-sm">
+		
 		<div class="mb-2 flex items-center gap-4">
-			<div class="rounded-full bg-orange-100 p-3 text-orange-500">
+			<!-- 💡 ไอคอนหัวข้อ -->
+			<div class="rounded-full bg-orange-100 p-3 text-orange-500 transition-colors duration-300 dark:bg-orange-900/40 dark:text-orange-400">
 				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-					></path>
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
 				</svg>
 			</div>
-			<h1 class="text-3xl font-bold text-gray-800">ปฏิทินกิจกรรม</h1>
+			<h1 class="text-3xl font-bold text-gray-800 transition-colors duration-300 dark:text-white">ปฏิทินกิจกรรม</h1>
 		</div>
-		<p class="mb-10 ml-14 text-gray-600">กำหนดการและกิจกรรมที่น่าสนใจตลอดปีการศึกษา</p>
+		<p class="mb-10 ml-14 text-gray-600 transition-colors duration-300 dark:text-gray-400">กำหนดการและกิจกรรมที่น่าสนใจตลอดปีการศึกษา</p>
 
 		<div class="mt-8">
 			{#each timelineEvents as event, index (event.id)}
@@ -234,53 +232,60 @@
 
 				<div class="flex">
 					<div class="flex w-12 shrink-0 flex-col items-center">
+						<!-- 💡 จุด Timeline -->
 						<div
 							class="z-10 mt-1 h-5 w-5 rounded-full {isUpcoming
-								? 'bg-orange-500'
-								: 'bg-gray-300'} shadow-sm transition-colors duration-300"
+								? 'bg-orange-500 dark:bg-orange-500 dark:shadow-[0_0_10px_rgba(249,115,22,0.5)]'
+								: 'bg-gray-300 dark:bg-gray-700'} shadow-sm transition-colors duration-300"
 						></div>
 
+						<!-- 💡 เส้น Timeline -->
 						{#if index !== timelineEvents.length - 1}
 							<div
 								class="-mt-1 h-full w-0.5 {isUpcoming
-									? 'bg-orange-200'
-									: 'bg-gray-200'} transition-colors duration-300"
+									? 'bg-orange-200 dark:bg-orange-900/50'
+									: 'bg-gray-200 dark:bg-gray-700'} transition-colors duration-300"
 							></div>
 						{/if}
 					</div>
 
 					<div class="flex-1 pt-0.5 pb-10 pl-2">
+						<!-- 💡 ป้ายกำกับ "เร็วๆ นี้" -->
 						{#if isUpcoming}
 							<span
-								class="mb-2 inline-block rounded-full bg-orange-100 px-3 py-1 text-xs font-bold tracking-wider text-orange-700 uppercase"
+								class="mb-2 inline-block rounded-full bg-orange-100 px-3 py-1 text-xs font-bold tracking-wider text-orange-700 uppercase transition-colors duration-300 dark:bg-orange-900/30 dark:text-orange-400"
 							>
 								เร็วๆ นี้
 							</span>
 						{/if}
 
-						<h3 class="mt-1 text-xl font-bold {isUpcoming ? 'text-gray-800' : 'text-gray-500'}">
+						<!-- 💡 ชื่อกิจกรรม -->
+						<h3 class="mt-1 text-xl font-bold transition-colors duration-300 {isUpcoming ? 'text-gray-800 dark:text-gray-100' : 'text-gray-500 dark:text-gray-500'}">
 							{event.title}
 						</h3>
 
+						<!-- 💡 ป้ายกำกับแผนกที่จัด -->
 						<span
-							class="mt-1 mb-2 inline-block rounded-md {event.department === 'สภานักศึกษา'
-								? 'border border-blue-100 bg-blue-50 text-blue-600'
-								: 'border border-gray-200 bg-gray-100 text-gray-600'} px-2 py-0.5 text-xs font-medium"
+							class="mt-1 mb-2 inline-block rounded-md transition-colors duration-300 {event.department === 'สภานักศึกษา'
+								? 'border border-blue-100 bg-blue-50 text-blue-600 dark:border-blue-800/50 dark:bg-blue-900/30 dark:text-blue-400'
+								: 'border border-gray-200 bg-gray-100 text-gray-600 dark:border-gray-700/50 dark:bg-gray-800 dark:text-gray-400'} px-2 py-0.5 text-xs font-medium"
 						>
 							จัดโดย: {event.department}
 						</span>
 
+						<!-- 💡 วันที่จัดกิจกรรม -->
 						<p
-							class="mb-3 text-sm font-semibold {isUpcoming ? 'text-orange-600' : 'text-gray-500'}"
+							class="mb-3 text-sm font-semibold transition-colors duration-300 {isUpcoming ? 'text-orange-600 dark:text-orange-400' : 'text-gray-500 dark:text-gray-500'}"
 						>
 							📅 {event.date}
 						</p>
 
+						<!-- 💡 รายละเอียดกิจกรรม (ถ้ามี) -->
 						{#if event.description}
 							<p
-								class="leading-relaxed {isUpcoming
-									? 'rounded-lg border border-gray-100 bg-gray-50 p-4 text-gray-600 shadow-sm'
-									: 'text-gray-500'}"
+								class="leading-relaxed transition-colors duration-300 {isUpcoming
+									? 'rounded-lg border border-gray-100 bg-gray-50 p-4 text-gray-600 shadow-sm dark:border-gray-700/50 dark:bg-gray-800/50 dark:text-gray-300'
+									: 'text-gray-500 dark:text-gray-500'}"
 							>
 								{event.description}
 							</p>
