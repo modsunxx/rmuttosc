@@ -209,6 +209,7 @@
 <svelte:head>
 	<title>ปฏิทินกิจกรรม | สภานักศึกษา RMUTTO</title>
 </svelte:head>
+<!-- 1. คลุมด้วย relative และ overflow-hidden พร้อมใส่ bg-white ตามแบบ -->
 
 <div class="min-h-screen bg-gray-50 px-6 py-12">
 	<div class="mx-auto max-w-4xl rounded-2xl border-t-4 border-orange-500 bg-white p-8 shadow-sm">
