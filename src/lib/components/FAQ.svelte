@@ -1,4 +1,6 @@
 <script lang="ts">
+	// 💡 ไม่ต้อง import slide ของ Svelte แล้วครับ เราจะใช้ Tailwind ล้วนๆ
+
 	let faqs = [
 		{
 			question: 'สภานักศึกษา มทร.ตะวันออก ทำหน้าที่อะไร?',
@@ -77,13 +79,19 @@
 					</span>
 				</button>
 
-				{#if activeIndex === index}
-					<div
-						class="border-t border-gray-50 bg-white px-6 pt-4 pb-6 leading-relaxed text-gray-600 transition-colors duration-300 dark:border-gray-700/50 dark:bg-transparent dark:text-gray-300"
-					>
-						<p>{faq.answer}</p>
+				<div
+					class="grid transition-all duration-500 ease-in-out {activeIndex === index
+						? 'grid-rows-[1fr] opacity-100'
+						: 'grid-rows-[0fr] opacity-0'}"
+				>
+					<div class="overflow-hidden">
+						<div
+							class="border-t border-gray-50 bg-white px-6 pt-4 pb-6 leading-relaxed text-gray-600 transition-colors duration-300 dark:border-gray-700/50 dark:bg-transparent dark:text-gray-300"
+						>
+							<p>{faq.answer}</p>
+						</div>
 					</div>
-				{/if}
+				</div>
 			</div>
 		{/each}
 	</div>
