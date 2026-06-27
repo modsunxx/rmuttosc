@@ -1,6 +1,4 @@
 <script lang="ts">
-	// 💡 ไม่ต้อง import slide ของ Svelte แล้วครับ เราจะใช้ Tailwind ล้วนๆ
-
 	let faqs = [
 		{
 			question: 'สภานักศึกษา มทร.ตะวันออก ทำหน้าที่อะไร?',
