@@ -2,10 +2,8 @@
 	import { page } from '$app/stores';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
-	// 💡 1. สร้าง State สำหรับคุมการเปิด-ปิดเมนูมือถือ
 	let isMobileMenuOpen = $state(false);
 
-	// ฟังก์ชันสลับการเปิด/ปิดเมนู
 	function toggleMenu() {
 		isMobileMenuOpen = !isMobileMenuOpen;
 	}
@@ -35,30 +33,36 @@
 			<div class="hidden items-center space-x-8 md:flex">
 				<a
 					href="/"
-					class="pb-1 transition-colors {$page.url.pathname === '/'
-						? 'border-b-2 border-blue-600 font-semibold text-blue-600 dark:border-blue-400 dark:text-blue-400'
-						: 'border-b-2 border-transparent font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'}"
+					class="pb-1 font-semibold transition-all duration-300 ease-in-out {$page.url.pathname ===
+					'/'
+						? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+						: 'border-b-2 border-transparent text-gray-600 hover:border-blue-300 hover:text-blue-600 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-blue-400'}"
 					>หน้าแรก</a
 				>
 				<a
 					href="/services"
-					class="pb-1 transition-colors {$page.url.pathname.startsWith('/services')
-						? 'border-b-2 border-blue-600 font-semibold text-blue-600 dark:border-blue-400 dark:text-blue-400'
-						: 'border-b-2 border-transparent font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'}"
+					class="pb-1 font-semibold transition-all duration-300 ease-in-out {$page.url.pathname.startsWith(
+						'/services'
+					)
+						? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+						: 'border-b-2 border-transparent text-gray-600 hover:border-blue-300 hover:text-blue-600 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-blue-400'}"
 					>บริการนักศึกษา</a
 				>
 				<a
 					href="/events"
-					class="pb-1 transition-colors {$page.url.pathname.startsWith('/events')
-						? 'border-b-2 border-blue-600 font-semibold text-blue-600 dark:border-blue-400 dark:text-blue-400'
-						: 'border-b-2 border-transparent font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'}"
+					class="pb-1 font-semibold transition-all duration-300 ease-in-out {$page.url.pathname.startsWith(
+						'/events'
+					)
+						? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+						: 'border-b-2 border-transparent text-gray-600 hover:border-blue-300 hover:text-blue-600 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-blue-400'}"
 					>กิจกรรม</a
 				>
 				<a
 					href="/about"
-					class="pb-1 transition-colors {$page.url.pathname === '/about'
-						? 'border-b-2 border-blue-600 font-semibold text-blue-600 dark:border-blue-400 dark:text-blue-400'
-						: 'border-b-2 border-transparent font-medium text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'}"
+					class="pb-1 font-semibold transition-all duration-300 ease-in-out {$page.url.pathname ===
+					'/about'
+						? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+						: 'border-b-2 border-transparent text-gray-600 hover:border-blue-300 hover:text-blue-600 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:text-blue-400'}"
 					>เกี่ยวกับเรา</a
 				>
 
@@ -73,7 +77,7 @@
 				<button
 					onclick={toggleMenu}
 					aria-label="Toggle mobile menu"
-					class="p-2 text-gray-500 hover:text-gray-700 focus:outline-none dark:text-gray-400 dark:hover:text-gray-200"
+					class="p-2 text-gray-500 transition-colors duration-300 hover:text-gray-700 focus:outline-none dark:text-gray-400 dark:hover:text-gray-200"
 				>
 					{#if isMobileMenuOpen}
 						<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -107,8 +111,8 @@
 				<a
 					href="/"
 					onclick={toggleMenu}
-					class="block rounded-md px-3 py-2 text-base font-medium transition-colors {$page.url
-						.pathname === '/'
+					class="block rounded-md px-3 py-2 text-base font-semibold transition-all duration-300 ease-in-out {$page
+						.url.pathname === '/'
 						? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'
 						: 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800'}"
 					>หน้าแรก</a
@@ -116,7 +120,7 @@
 				<a
 					href="/services"
 					onclick={toggleMenu}
-					class="block rounded-md px-3 py-2 text-base font-medium transition-colors {$page.url.pathname.startsWith(
+					class="block rounded-md px-3 py-2 text-base font-semibold transition-all duration-300 ease-in-out {$page.url.pathname.startsWith(
 						'/services'
 					)
 						? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'
@@ -126,7 +130,7 @@
 				<a
 					href="/events"
 					onclick={toggleMenu}
-					class="block rounded-md px-3 py-2 text-base font-medium transition-colors {$page.url.pathname.startsWith(
+					class="block rounded-md px-3 py-2 text-base font-semibold transition-all duration-300 ease-in-out {$page.url.pathname.startsWith(
 						'/events'
 					)
 						? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'
@@ -136,8 +140,8 @@
 				<a
 					href="/about"
 					onclick={toggleMenu}
-					class="block rounded-md px-3 py-2 text-base font-medium transition-colors {$page.url
-						.pathname === '/about'
+					class="block rounded-md px-3 py-2 text-base font-semibold transition-all duration-300 ease-in-out {$page
+						.url.pathname === '/about'
 						? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'
 						: 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-800'}"
 					>เกี่ยวกับเรา</a
