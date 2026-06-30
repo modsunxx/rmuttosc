@@ -139,9 +139,9 @@
 		<!-- 🥇 1. กลุ่มประธานสภา (ใหญ่ที่สุด ตรงกลาง) -->
 		<div class="mb-12 flex justify-center">
 			{#each president as member (member.name)}
-				<div class="flex flex-col items-center rounded-2xl border border-purple-200 bg-white p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-yellow-900/50 dark:bg-gray-800/60 dark:backdrop-blur-sm sm:w-112.5">
+				<div class="flex flex-col items-center rounded-2xl border border-purple-200 bg-white p-8 text-center shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-xl dark:border-purple-900/50 dark:bg-gray-800/60 dark:backdrop-blur-sm sm:w-112.5">
 					<img
-						class="mb-6 h-48 w-48 rounded-full border-4 border-purple-100 object-cover shadow-md transition-colors duration-300 dark:border-yellow-900/50"
+						class="mb-6 h-48 w-48 rounded-full border-4 border-purple-100 object-cover shadow-md transition-colors duration-300 dark:border-purple-900/50"
 						src={member.img}
 						alt={member.name}
 					/>
