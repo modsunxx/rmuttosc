@@ -1,5 +1,4 @@
 <script lang="ts">
-	// 1. เพิ่มคลาส dark: เข้าไปใน iconColor และ bgColor ของทุกไฟล์
 	const folders = [
 		{
 			id: 'club-forms',
@@ -204,10 +203,8 @@
 	<title>ดาวน์โหลดเอกสาร | สภานักศึกษา RMUTTO</title>
 </svelte:head>
 
-<!-- พื้นหลังหลัก -->
 <div class="min-h-screen bg-gray-50 pb-20 transition-colors duration-500 dark:bg-gray-950">
 	
-	<!-- Header -->
 	<section class="border-b border-gray-200 bg-white py-16 transition-colors duration-500 sm:py-24 dark:border-gray-800 dark:bg-gray-900/50">
 		<div class="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
 			<div class="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100 transition-colors duration-300 dark:bg-green-900/40">
@@ -226,7 +223,6 @@
 
 	<section class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
 		
-		<!-- State 1: แสดงหน้าโฟลเดอร์หลัก -->
 		{#if !selectedFolder}
 			<div class="mb-8">
 				<h2 class="text-2xl font-bold text-gray-900 transition-colors duration-300 dark:text-white">หมวดหมู่เอกสาร</h2>
@@ -234,6 +230,7 @@
 			</div>
 
 			<div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+				
 				{#each folders as folder (folder.id)}
 					<button
 						onclick={() => openFolder(folder)}
@@ -253,11 +250,33 @@
 						</div>
 					</button>
 				{/each}
+
+				<a
+					href="https://academic.rmutto.ac.th/?page_id=626"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group flex w-full items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-gray-700/50 dark:bg-gray-800/50 dark:hover:shadow-purple-900/20"
+				>
+					<div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-colors duration-300 group-hover:scale-110 dark:bg-purple-900/30 dark:text-purple-400">
+						<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+						</svg>
+					</div>
+					<div>
+						<h3 class="text-lg font-bold text-gray-900 transition-colors duration-300 dark:text-white">เอกสารสำนักส่งเสริมวิชาการฯ</h3>
+						<p class="mt-1 line-clamp-2 text-sm text-gray-500 transition-colors duration-300 dark:text-gray-400">ดาวน์โหลดแบบฟอร์มคำร้องต่างๆ จากเว็บไซต์สำนักส่งเสริมวิชาการและงานทะเบียน (สวท.)</p>
+						<span class="mt-3 inline-flex items-center gap-1 rounded-full bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-700 transition-colors duration-300 dark:bg-purple-900/30 dark:text-purple-400">
+							เปิดเว็บไซต์ภายนอก
+							<svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+							</svg>
+						</span>
+					</div>
+				</a>
+
 			</div>
 
-		<!-- State 2: แสดงไฟล์ในโฟลเดอร์ -->
 		{:else}
-			<!-- ปุ่มย้อนกลับ และ ชื่อโฟลเดอร์ -->
 			<div class="mb-8 flex items-center gap-4 border-b border-gray-200 pb-4 transition-colors duration-300 dark:border-gray-800">
 				<button
 					onclick={backToFolders}
@@ -276,10 +295,8 @@
 				</h2>
 			</div>
 
-			<!-- รายการไฟล์ -->
 			<div class="space-y-4">
 				
-				<!-- 💡 กรณีที่ 1: มีโฟลเดอร์ย่อย (เช่น แบบฟอร์มชมรม) -->
 				{#if selectedFolder.subfolders && selectedFolder.subfolders.length > 0}
 					<div class="space-y-8">
 						{#each selectedFolder.subfolders as subfolder (subfolder.id)}
@@ -311,7 +328,6 @@
 						{/each}
 					</div>
 				
-				<!-- 💡 กรณีที่ 2: เป็นไฟล์ธรรมดา -->
 				{:else if selectedFolder.files && selectedFolder.files.length > 0}
 					{#each selectedFolder.files as doc (doc.id)}
 						<div class="flex flex-col items-center justify-between gap-4 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:shadow-md sm:flex-row dark:border-gray-700/50 dark:bg-gray-800/50 dark:hover:shadow-green-900/10">
@@ -332,7 +348,6 @@
 						</div>
 					{/each}
 
-				<!-- 💡 กรณีที่ 3: ไม่มีไฟล์เลย -->
 				{:else}
 					<div class="rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-16 text-center transition-colors duration-300 dark:border-gray-700 dark:bg-gray-800/30">
 						<p class="text-gray-500 dark:text-gray-400">ยังไม่มีเอกสารในโฟลเดอร์นี้</p>

@@ -11,7 +11,6 @@
 		});
 	}
 
-	// 💡 อัปเดต: เพิ่มคลาส dark:... สำหรับป้ายสถานะแต่ละสี
 	function getStatusBadge(status: string) {
 		if (status === 'pending')
 			return 'bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-800/50';
@@ -216,14 +215,16 @@
 							</span>
 						</div>
 
+						<!-- 💡 แกะ line-clamp ออก เพิ่ม break-words ตรงหัวข้อ-->
 						<h3
-							class="mb-2 line-clamp-1 text-lg font-bold text-gray-800 transition-colors duration-300 dark:text-gray-100"
+							class="mb-2 wrap-break-word text-lg font-bold text-gray-800 transition-colors duration-300 dark:text-gray-100"
 						>
 							{complaint.topic}
 						</h3>
 
+						<!-- 💡 แกะ line-clamp ออก เพิ่ม whitespace-pre-wrap และ break-words ตรงเนื้อหา -->
 						<p
-							class="mb-6 line-clamp-3 grow text-sm leading-relaxed text-gray-600 transition-colors duration-300 dark:text-gray-400"
+							class="mb-6 grow whitespace-pre-wrap wrap-break-word text-sm leading-relaxed text-gray-600 transition-colors duration-300 dark:text-gray-400"
 						>
 							{complaint.detail}
 						</p>
