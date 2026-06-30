@@ -252,27 +252,28 @@
 				{/each}
 
 				<a
-					href="https://academic.rmutto.ac.th/?page_id=626"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="group flex w-full items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-gray-700/50 dark:bg-gray-800/50 dark:hover:shadow-purple-900/20"
-				>
-					<div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-colors duration-300 group-hover:scale-110 dark:bg-purple-900/30 dark:text-purple-400">
-						<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-						</svg>
-					</div>
-					<div>
-						<h3 class="text-lg font-bold text-gray-900 transition-colors duration-300 dark:text-white">เอกสารสำนักส่งเสริมวิชาการฯ</h3>
-						<p class="mt-1 line-clamp-2 text-sm text-gray-500 transition-colors duration-300 dark:text-gray-400">ดาวน์โหลดแบบฟอร์มคำร้องต่างๆ จากเว็บไซต์สำนักส่งเสริมวิชาการและงานทะเบียน (สวท.)</p>
-						<span class="mt-3 inline-flex items-center gap-1 rounded-full bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-700 transition-colors duration-300 dark:bg-purple-900/30 dark:text-purple-400">
-							เปิดเว็บไซต์ภายนอก
-							<svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-							</svg>
-						</span>
-					</div>
-				</a>
+    href="https://academic.rmutto.ac.th/?page_id=626"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group sm:col-span-2 flex w-full items-start gap-4 rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:border-gray-700/50 dark:bg-gray-800/50 dark:hover:shadow-purple-900/20"
+>
+    <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-purple-50 text-purple-600 transition-colors duration-300 group-hover:scale-110 dark:bg-purple-900/30 dark:text-purple-400">
+        <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+    </div>
+    
+    <div>
+        <h3 class="text-lg font-bold text-gray-900 transition-colors duration-300 dark:text-white">เอกสารสำนักส่งเสริมวิชาการฯ</h3>
+        <p class="mt-1 line-clamp-2 text-sm text-gray-500 transition-colors duration-300 dark:text-gray-400">ดาวน์โหลดแบบฟอร์มคำร้องต่างๆ จากเว็บไซต์สำนักส่งเสริมวิชาการและงานทะเบียน (สวท.)</p>
+        <span class="mt-3 inline-flex items-center gap-1 rounded-full bg-purple-50 px-3 py-1 text-xs font-semibold text-purple-700 transition-colors duration-300 dark:bg-purple-900/30 dark:text-purple-400">
+            เปิดเว็บไซต์ภายนอก
+            <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+        </span>
+    </div>
+</a>
 
 			</div>
 
